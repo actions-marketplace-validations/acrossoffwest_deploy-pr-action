@@ -91,15 +91,15 @@ on:
 jobs:
   release:
     name: Deploy website
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     if: "!contains(github.event.head_commit.message, '[skip ci]') && (contains(github.event.comment.body, 'Deploy') || contains(github.event.comment.body, 'deploy') || github.event_name == 'push' || github.event_name == 'pull_request')"
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: 12
+          node-version: 19.6.0
       - name: Install dependencies
         run: npm ci
       - name: Build static site
@@ -111,7 +111,7 @@ jobs:
           robotsTxtPath: dist/robots.txt # Add robots.txt file
           distDir: dist # Path to dist directory
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub token
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }} # GitHub token
           SURGE_LOGIN: ${{ secrets.SURGE_LOGIN }} # Surge.sh email
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }} # Surge.sh token
 ```

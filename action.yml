@@ -1,4 +1,4 @@
-name: Deploy PR
+name: Deploy PR with surge.sh
 description: Deploy pull requests as static sites to Surge.sh
 icon: arrow-up-circle
 color: purple

@@ -1,4 +1,4 @@
-import { getInput, setFailed, debug, setOutput } from "@actions/core";
+import {getInput, setFailed, debug, setOutput, exportVariable} from "@actions/core";
 import { context, getOctokit } from "@actions/github";
 import slugify from "@sindresorhus/slugify";
 import { execSync } from "child_process";
@@ -66,6 +66,7 @@ export const run = async () => {
       console.log(result);
       console.log("Deployed", `https://${surgeDomain}`);
       setOutput('SURGE_DOMAIN', surgeDomain);
+      exportVariable('SURGE_DOMAIN', surgeDomain);
       if (addDeployment)
         await octokit.repos.createDeploymentStatus({
           owner: context.repo.owner,
@@ -124,6 +125,7 @@ export const run = async () => {
       console.log(result);
       console.log("Deployed", `https://${surgeDomain}`);
       setOutput('SURGE_DOMAIN', surgeDomain);
+      exportVariable('SURGE_DOMAIN', surgeDomain);
       if (addDeployment)
         await octokit.repos.createDeploymentStatus({
           owner: context.repo.owner,

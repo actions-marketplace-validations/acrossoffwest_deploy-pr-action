@@ -37,6 +37,9 @@ inputs:
   command:
     required: false
     description: Command can be "teardown" or nothing
+outputs:
+  SURGE_DOMAIN:
+    description: 'Domain where you could find you project'
 runs:
   using: node12
   main: dist/index.js
